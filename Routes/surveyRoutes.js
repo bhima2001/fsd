@@ -30,7 +30,6 @@ router.post("/",(req,res)=>{
 
 router.get("/:id",(req,res)=>{
     const id=req.params.id;
-    console.log(id)
     let temp={};
     for (let i=0;i<surveyData.length;i++){
         if (id==surveyData[i].id){
@@ -39,6 +38,40 @@ router.get("/:id",(req,res)=>{
         }
     }
     res.status("200").json(temp)
+})
+
+
+router.delete("/:id",(req,res)=>{
+    const id=req.params.id;
+    let temp;
+    for (let i=0;i<surveyData.length;i++){
+        if (id==surveyData[i].id){
+            temp=i
+            break;
+    }
+}
+    surveyData.splice(temp,1);
+    res.json("Deleted Successfully")
+})
+
+router.patch("/:id",(req,res)=>{
+    let temp
+    const id=req.params.id;
+    for (let i=0;i<surveyData.length;i++){
+        if (id==surveyData[i].id){
+            temp=i
+            break;
+       }
+    }
+    if (req.body.name!=="")surveyData[temp].name=req.body.name;
+    if(req.body.age!=="")surveyData[temp].age=req.body.age;
+    if (req.body.educationProfile!=="")surveyData[temp].educationProfile=req.body.educationProfile;
+    if(req.body.address!=="")surveyData[temp].address=req.body.address;
+    if (req.body.radio1!=="")surveyData[temp].radio1=req.body.radio1;
+    if (req.body.radio2!=="")surveyData[temp].radio2=req.body.radio2;
+    if (req.body.radio3!=="")surveyData[temp].radio3=req.body.radio3;
+    if (req.body.radio4!=="")surveyData[temp].radio4=req.body.radio4;
+    res.json("patch Successful")
 })
 
 
